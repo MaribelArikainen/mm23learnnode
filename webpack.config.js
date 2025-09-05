@@ -22,7 +22,7 @@ module.exports = {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
             },
-             {
+            {
                 test: /\.(scss)$/,
                 use: [
                     {
@@ -54,12 +54,21 @@ module.exports = {
                         }
                     }
                 ]
-            }
+            },
+            {
+                test: /\.njk$/,
+                use: [
+                    {
+                        loader: "simple-nunjucks-loader",
+                        options: {},
+                    },
+                ],
+            },
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html'
+            template: './src/index.njk'
         })
     ],
 };
