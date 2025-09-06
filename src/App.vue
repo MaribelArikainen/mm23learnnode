@@ -1,63 +1,20 @@
-<script setup>
-import { ref, computed } from 'vue';
-let newItem = ref('');
-let items = ref([
-    {text: 'piim', done: true},
-    {text: 'viin', done: false},
-    {text: 'sai', done: true},
-    {text: 'leib', done: false},
-    {text: 'õlu', done: true},
-    {text: 'banaan', done: false},
-]);
-
-function add(){
-    if(newItem.value.trim() !== ''){
-        items.value.push({text: newItem.value, done: false});
-    }
-    newItem.value = '';
-}
-
-let doneItems = computed(() => items.value.filter(item => item.done));
-let toDoItems = computed(() => items.value.filter(item => !item.done));
-
-</script>
-
 <template>
-    <div class="container mt-2">
-        <div class="field has-addons">
-            <div class="control is-expanded">
-                <input class="input" type="text" v-model="newItem" @keydown.enter="add">
-            </div>
-            <div class="control">
-                <button class="button is-info" @click="add">
-                    Add
-                </button>
-            </div>
-        </div>
-        <div class="content">
-            <h1>All Items</h1>
-            <ul>
-                <li v-for="item in items">
-                    {{ item.text }}
-                    <input type="checkbox" v-model="item.done">
-                </li>
-            </ul>
-
-            <h1>Done Items</h1>
-            <ul>
-                <li v-for="item in doneItems">
-                    {{ item.text }}
-                    <input type="checkbox" v-model="item.done">
-                </li>
-            </ul>
-
-            <h1>ToDo Items</h1>
-            <ul>
-                <li v-for="item in toDoItems">
-                    {{ item.text }}
-                    <input type="checkbox" v-model="item.done">
-                </li>
-            </ul>
-        </div>
-    </div>
+  <div>
+    <Notification color="danger">
+      Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem ipsum
+      dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut,
+      porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam
+      gravida purus diam, et dictum <a>felis venenatis</a> efficitur.
+    </Notification>
+  </div>
 </template>
+
+<script>
+import Notification from "./components/Notification.vue";
+
+export default {
+  components: {
+    Notification,
+  },
+};
+</script>
