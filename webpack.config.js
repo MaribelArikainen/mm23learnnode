@@ -1,21 +1,29 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const autoprefixer = require('autoprefixer');
+import path from 'path';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import autoprefixer from 'autoprefixer';
+import { fileURLToPath } from 'url';
 
-module.exports = {
-    entry: './src/index.js',
-    output: {
-        filename: 'main.js',
-        path: path.resolve(__dirname, 'dist'),
-        clean: true,
+const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
+const __dirname = path.dirname(__filename); // get the name of the directory
+
+let response = await fetch('https://api.spaceflightnewsapi.net/v4/articles/?format=json&limit=12');
+let body = await response.json();
+let articles = body.results;
+
+export default {
+  entry: "./src/index.js",
+  output: {
+    filename: "main.js",
+    path: path.resolve(__dirname, "dist"),
+    clean: true,
+  },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "public"),
     },
-    devServer: {
-        static: {
-            directory: path.join(__dirname, 'public'),
-        },
-        compress: true,
-        port: 9000,
-    },
+    compress: true,
+    port: 9000,
+  },
     module: {
         rules: [
             {
@@ -77,6 +85,9 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'blog.html',
       template: "./src/blog.njk",
+      templateParameters: {
+        articles: articles
+      }
     }),
     new HtmlWebpackPlugin({
       filename: 'contact.html',
