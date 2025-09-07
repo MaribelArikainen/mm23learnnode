@@ -1,6 +1,8 @@
 <script setup>
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import 'leaflet/dist/images/marker-icon.png';
+import 'leaflet/dist/images/marker-shadow.png';
 import { onMounted } from "vue";
 let map = null;
 
@@ -11,6 +13,8 @@ onMounted(() => {
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
+
+  let marker = L.marker([51.5, -0.09]).addTo(map);
 });
 
 function goTo(coords, zoom){ 
