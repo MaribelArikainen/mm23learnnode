@@ -10,6 +10,7 @@ import Buttons from './pages/Buttons.vue';
 import NotificationExample from './pages/NotificationExample.vue';
 import ChuckNorris from './pages/ChuckNorris.vue';
 import RickAndMorty from './pages/RickAndMorty.vue';
+import Maps from './pages/Maps.vue';
 
 const routes = [
     { path: '/', component: ToDo, name: 'ToDo'},
@@ -18,6 +19,7 @@ const routes = [
     { path: '/notifications', component: NotificationExample, name: 'Notifications' },
     { path: '/chuck', component: ChuckNorris, name: 'Chuck Norris' },
     { path: '/rickandmorty', component: RickAndMorty, name: 'Rick And Morty' },
+    { path: '/maps', component: Maps, name: 'Maps'},
 ];
   
 const router = createRouter({
