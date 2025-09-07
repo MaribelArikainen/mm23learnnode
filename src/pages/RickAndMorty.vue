@@ -5,6 +5,7 @@ import CharacterCard from "../components/CharacterCard.vue";
 let characters = ref([]);
 let info = ref({});
 let searchValue = ref('');
+let searchDebounce = null;
 getCharacters("https://rickandmortyapi.com/api/character");
 
 function getCharacters(url) {
@@ -28,14 +29,18 @@ function prev() {
   getCharacters(info.value.prev);
 }
 function search(){
-    getCharacters("https://rickandmortyapi.com/api/character");
+    clearTimeout(searchDebounce);
+    searchDebounce = setTimeout(()=> {
+        getCharacters("https://rickandmortyapi.com/api/character");
+    }, 500);
+    
 }
 </script>
 <template>
   <div class="container">
     <div class="field has-addons">
         <div class="control is-expanded">
-            <input v-model="searchValue" class="input" type="text" placeholder="Search name">
+            <input v-model="searchValue" class="input" type="text" placeholder="Search name" @input="search">
         </div>
         <div class="control">
             <button class="button is-info" @click="search">
