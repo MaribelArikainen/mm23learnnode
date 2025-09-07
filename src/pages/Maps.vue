@@ -14,7 +14,16 @@ onMounted(() => {
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(map);
 
-  let marker = L.marker([51.5, -0.09]).addTo(map);
+  var polygon = L.polygon([
+    [59.40663, 24.67768],
+    [59.40663, 24.67788],
+    [59.40652, 24.67788],
+    [59.40652, 24.67768]
+    
+    ]).addTo(map);
+  let marker1 = L.marker([51.5, -0.09]).addTo(map);
+  let marker2 = L.marker([59.4047, 24.6765]).addTo(map);
+  let marker3 = L.marker([59.406575, 24.67778]).addTo(map);
 });
 
 function goTo(coords, zoom){ 
@@ -23,7 +32,14 @@ function goTo(coords, zoom){
 </script>
 
 <template>
-  <button class="button is-primary" @click="goTo([59.4047, 24.6765], 19)">Go To Alcohol</button>
+    <div class="field has-addons">
+        <div class="control">
+            <button class="button is-primary" @click="goTo([59.4047, 24.6765], 19)">Go To Alcohol</button>
+        </div>
+        <div class="control">
+            <button class="button is-primary" @click="goTo([59.406575, 24.67778], 19)">Go To Home</button>
+        </div>
+    </div>
   <div id="map"></div>
 </template>
 
